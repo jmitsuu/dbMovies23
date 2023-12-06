@@ -5,7 +5,7 @@ import { ref, onMounted } from "vue";
 import Layout from "../../components/Layout.vue";
 import ListCards from "../../components/ListCards.vue"
 const store = useRequests();
-const countPage = ref(10);
+const countPage = ref(5);
 const pages = ref([])
 const selectPage = ref(1)
 for (let i = 0; i < countPage.value; i++) {
@@ -17,9 +17,7 @@ function getApi(pg) {
   store.fetchApi(`movie/popular?language=pt-BR&page=${pg}`)
 }
 onMounted(() => {
-  store.fetchApi(`movie/popular?language=pt-BR&page=1`)
-
-  console.log(selectPage.value, 'dsdkos')
+  store.fetchApi(`movie/popular?language=pt-BR&page=${selectPage.value}`)
 })
 </script>
 

@@ -5,11 +5,13 @@ import MenuHeaderVue from './components/MenuHeader.vue';
 </script>
 
 <template>
-  <main class="bg-gradient-to-br from-blue-800 to-purple-950 flex ">
+  <main class="bg-gradient-to-br from-violet-950 to-purple-950 flex ">
       <Menu />
-    <div class="flex flex-col ">
-      <div class="container p-8">
-        <MenuHeaderVue />
+      <MenuHeaderVue />
+    <div class="m-auto">
+  
+      <div class="container p-8 mt-24 min-h-screen ">
+   
       <RouterView class="" />
       </div>
 

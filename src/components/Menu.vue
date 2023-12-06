@@ -6,7 +6,7 @@ import { FilmIcon, NewspaperIcon, TvIcon } from '@heroicons/vue/24/solid'
     <section class="relative">
 
 
-        <header class="h-screen items-center text-left bg-transparent xl:w-80 md:flex hidden gap-10 flex-col  left-0">
+        <header class="min-h-screen  h-full shadow-md items-center text-left bg-transparent xl:w-80 md:flex hidden gap-10 flex-col  left-0">
             <div>
                 <h1 class="text-white font-bold text-[1.9rem] mt-7 uppercase">MoviesDB</h1>
                 <h1 class="text-white font-semibold text-[1.3rem] mb-20 mt-10">Filmes</h1>
