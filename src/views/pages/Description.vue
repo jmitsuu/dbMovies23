@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useRequests } from "../../stores/requests";
+import Vote from "../../helpers/Vote.vue";
 const store = useRequests();
 const route = useRoute();
 
@@ -15,11 +16,16 @@ onMounted(() => {
 
 <template>
   <div
-    class="container shadow-2xl flex gap-16 justify-center bg-gradient-to-tr from-black to-transparent p-10"
+    class="container shadow-2xl flex gap-16 justify-center bg-gradient-to-tr bg-scroll from-black to-transparent p-10"
   >
     <div class="">
-      <div>
-        <h1 class="text-white">{{ selectedCard.vote_average.toFixed(1) }}</h1>
+      <div class="">
+        <div class="flex items-center gap-2">
+            <h1 class="text-white flex text-center text-[1.4rem]">{{ selectedCard.vote_average.toFixed(1) }} </h1>
+        <Vote :voteAv="selectedCard.vote_average.toFixed(0)" :styleVote="'text-yellow-500 h-8 w-8'" />
+
+        </div>
+
         <div>
           <h1 class="text-white font-bold text-[2.2rem]">Genero</h1>
           <div v-for="detail in store.details.genres">
@@ -45,7 +51,7 @@ onMounted(() => {
 
     <img
       :src="`https://image.tmdb.org/t/p/original/${selectedCard.poster_path}`"
-      class="w-[350px] h-[500px]"
+      class="w-[350px] h-[500px] "
     />
   </div>
 </template>
