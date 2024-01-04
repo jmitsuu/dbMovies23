@@ -1,34 +1,25 @@
 <script setup>
 import axios from "axios";
 import { useRequests } from "@/stores/requests.js";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import Layout from "../../components/Layout.vue";
 import ListCards from "../../components/ListCards.vue";
-import Vote from "../../helpers/Vote.vue";
+import Vote from "../../components/Vote.vue";
 const store = useRequests();
-const countPage = ref(5);
-const pages = ref([])
-const selectPage = ref(1);
-const validatePage = ref(false)
-for (let i = 0; i < countPage.value; i++) {
-  console.log(i)
-  pages.value.push(i + 1)
+const page = ref(1);
 
+const nextPage = () => {
+  page.value++;
+  return store.fetchApi(`movie/popular?language=pt-BR&page=${page.value}`)
 }
-function nextPages(){
-  validatePage.value = true;
- 
-  pages.value =  10;
-
-}
-if(validatePage.value){
-  pages.value.shift(0, 6)
-}
-function getApi(pg) {
-  store.fetchApi(`movie/popular?language=pt-BR&page=${pg}`)
+const backPage = () => {
+ if(page.value > 1 ){
+  page.value --;
+ }
+  return store.fetchApi(`movie/popular?language=pt-BR&page=${page.value}`)
 }
 onMounted(() => {
-  store.fetchApi(`movie/popular?language=pt-BR&page=${selectPage.value}`)
+  store.fetchApi(`movie/popular?language=pt-BR`)
 })
 </script>
 
@@ -37,7 +28,7 @@ onMounted(() => {
   <nav aria-label="Page navigation example" class="mb-8">
     <ul class="flex items-center -space-x-px h-8 text-sm">
       <li class="bg-purple-400 rounded-full h-8 w-8 flex justify-center items-center">
-        <a href="#" class="rounded-md">
+        <a href="#" @click="backPage" class="rounded-md">
 
           <svg class=" h-4 w-4 m-4  first-letter: rtl:rotate-180  text-white" aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -46,16 +37,10 @@ onMounted(() => {
           </svg>
         </a>
       </li>
-      <li v-for="pg in pages">
-        <a class="flex items-center 
-          justify-center px-3 h-8 
-          leading-tight text-white
-          cursor-pointer
-               " @click="getApi(pg)">{{ pg }}</a>
-      </li>
-
-      <li class="bg-purple-400 rounded-full h-8 w-8 flex justify-center items-center">
-        <a @click="nextPages" class=" rounded-md">
+   
+      <span class="text-gray-200 text-xl p-6"> {{ page }}</span>
+      <li class="bg-purple-400 rounded-full cursor-pointer h-8 w-8 flex justify-center items-center">
+        <a @click="nextPage" class=" rounded-md">
 
           <svg class=" h-4 w-4 m-4  first-letter: rtl:rotate-180  text-white" aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -70,14 +55,14 @@ onMounted(() => {
 
     <template #cards>
 
-      <div v-for="card in store.response" :key="card.id" class=" shadow-sm m-1 flex flex-col p-1 bg-black/25 rounded-md">
+      <div v-for="card in store.response" :key="card.id" class=" m-1 flex flex-col p-1  ">
         <ListCards :id="card.id" :imgUrl="card.poster_path" :getInfo="card" :vote="card.vote_average * 10"
           :dataMovie="card.release_date" :incrcard="card" :title="card.title" :cardCart="card" />
 
         <h1 class=" text-gray-100 font-bold mt-3  ">
 
           {{ card.title }}
-          <Vote :voteAv="card.vote_average.toFixed(0)" :styleVote="'h-4 w-4 text-yellow-500'" />
+          <Vote :voteAv="card.vote_average" :styleVote="'h-4 w-4 text-yellow-500'" />
 
         </h1>
 

@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useRequests } from "../../stores/requests";
-import Vote from "../../helpers/Vote.vue";
+import Vote from "../../components/Vote.vue";
 const store = useRequests();
 const route = useRoute();
 

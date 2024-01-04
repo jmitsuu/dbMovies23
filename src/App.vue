@@ -5,7 +5,7 @@ import MenuHeaderVue from './components/MenuHeader.vue';
 </script>
 
 <template>
-  <main class="bg-gradient-to-br from-violet-950/75 to-purple-950 flex ">
+  <main class=" bg-[#1B171F] flex ">
       <Menu />
       <MenuHeaderVue />
     <div class="m-auto">
