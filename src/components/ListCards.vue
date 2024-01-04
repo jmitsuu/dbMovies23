@@ -37,8 +37,8 @@ onMounted(() => {
                     </div>
 
                     <div v-else class="relative cursor-pointer " @click="goToDescription(id)">
-                        <img :src="`https://image.tmdb.org/t/p/original/${props.imgUrl}`"
-                        class="h-[350px] w-[300px] "
+                        <img :src="`https://image.tmdb.org/t/p/w500/${props.imgUrl}`"
+                        class="xl:h-[360px] xl:w-[300px] "
                            />
                         <!-- <h1 class="right-2 absolute top-0 z-50 font-bold text-yellow-400">
                             {{ vote.toFixed(0) }} %

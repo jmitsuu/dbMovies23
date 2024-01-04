@@ -10,7 +10,7 @@ import MenuHeaderVue from './components/MenuHeader.vue';
       <MenuHeaderVue />
     <div class="m-auto">
   
-      <div class="container p-8 mt-24 min-h-screen w-screen ">
+      <div class="container p-8 mt-24 min-h-screen  ">
    
       <RouterView class="" />
       </div>
